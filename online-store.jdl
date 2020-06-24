@@ -1,13 +1,13 @@
 entity Product {
 	name String required
     description String
-    price BigDecimal required min(0) 
+    price BigDecimal required min(0)
     size Size required
     image ImageBlob
 }
 
 enum Size {
-	S, M, L, XL, XXL 
+	S, M, L, XL, XXL
 }
 
 entity ProductCategory {
@@ -58,6 +58,7 @@ entity Invoice {
     paymentMethod PaymentMethod required
     paymentDate Instant required
     paymentAmount BigDecimal required
+    code String required
 }
 
 enum InvoiceStatus {
@@ -75,21 +76,21 @@ entity Shipment {
 }
 
 relationship OneToOne {
-	Customer{user} to User
+	Customer{user(login) required} to User
 }
 
 relationship ManyToOne {
-	OrderItem{product} to Product
+	OrderItem{product(name) required} to Product
 }
 
 relationship OneToMany {
-	Customer{order} to ProductOrder{customer},
-    ProductOrder{orderItem} to OrderItem{order},
-    ProductOrder{invoice} to Invoice{order},
-    Invoice{shipment} to Shipment{invoice},
-    ProductCategory{product} to Product{productCategory}
+	Customer{order} to ProductOrder{customer(email) required},
+    ProductOrder{orderItem} to OrderItem{order(code) required},
+    ProductOrder{invoice} to Invoice{order(code) required},
+    Invoice{shipment} to Shipment{invoice(code) required},
+    ProductCategory{product} to Product{productCategory(name)}
 }
 
 service * with serviceClass
-paginate Product, Customer, ProductOrder, Invoice, Shipment, 
+paginate Product, Customer, ProductOrder, Invoice, Shipment,
 OrderItem with pagination
