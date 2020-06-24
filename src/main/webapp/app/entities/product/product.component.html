@@ -18,6 +18,48 @@
         <span jhiTranslate="storeApp.product.home.notFound">No products found</span>
     </div>
 
+<<<<<<< HEAD
+    <div class="table-responsive" id="entities" *ngIf="products && products.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="storeApp.product.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="description"><span jhiTranslate="storeApp.product.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="price"><span jhiTranslate="storeApp.product.price">Price</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="size"><span jhiTranslate="storeApp.product.size">Size</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="image"><span jhiTranslate="storeApp.product.image">Image</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="productCategory.name"><span jhiTranslate="storeApp.product.productCategory">Product Category</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products ;trackBy: trackId">
+                    <td><a [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a></td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price }}</td>
+                    <td jhiTranslate="{{ 'storeApp.Size.' + product.size }}">{{ product.size }}</td>
+                    <td>
+                        <a *ngIf="product.image" (click)="openFile(product.imageContentType, product.image)">
+                            <img [src]="'data:' + product.imageContentType + ';base64,' + product.image" style="max-height: 30px;" alt="product image"/>
+                        </a>
+                        <span *ngIf="product.image">{{ product.imageContentType }}, {{ byteSize(product.image) }}</span>
+                    </td>
+                    <td>
+                        <div *ngIf="product.productCategory">
+                            <a [routerLink]="['/product-category', product.productCategory?.id, 'view']" >{{ product.productCategory?.name }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/product', product.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+=======
 <!--    <div class="table-responsive" id="entities" *ngIf="products && products.length > 0">-->
 <!--        <table class="table table-striped" aria-describedby="page-heading">-->
 <!--            <thead>-->
@@ -85,6 +127,7 @@
             <span class="mx-2 col-1">Sort by</span>
             <div class="btn-group" role="group" jhiSort [(predicate)]="predicate">
 <!--                 [(ascending)]="reverse" [callback]="transition.bind(this)"-->
+>>>>>>> 8c5c18c... update product listing page UI
 
                 <button type="button" class="btn btn-light" jhiSortBy="name">
                     <span class="d-flex">
